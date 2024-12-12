@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/tvNumeroGuia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Número de guía: 123"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#000000" />
+    <TextView
+        android:id="@+id/tvEstado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Estado: Estado Falso"
+        android:textSize="16sp"
+        android:textColor="#777" />
+    <TextView
+        android:id="@+id/tvDescripcion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sin Cambios"
+        android:textSize="16sp"
+        android:textColor="#555555" />
+
+    <TextView
+        android:id="@+id/tvNombreCompletoCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cliente: Juan Pérez"
+        android:textSize="16sp"
+        android:textColor="#000000" />
+    <TextView
+        android:id="@+id/tvCorreoCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cliente: Juan Pérez"
+        android:textSize="16sp"
+        android:textColor="#000000" />
+    <LinearLayout
+        android:id="@+id/layoutDestino"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp"
+        >
+
+        <TextView
+            android:id="@+id/tvCalleDestino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calle: Calle Falsa, 123"
+            android:textSize="16sp"
+            android:textColor="#777" />
+
+        <TextView
+            android:id="@+id/tvNumeroDestino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Número: 123"
+            android:textSize="16sp"
+            android:textColor="#777" />
+
+        <TextView
+            android:id="@+id/tvColoniaDestino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Colonia: Colonia Falsa"
+            android:textSize="16sp"
+            android:textColor="#777" />
+
+        <TextView
+            android:id="@+id/tvCodigoPostalDestino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Código Postal: 12345"
+            android:textSize="16sp"
+            android:textColor="#777" />
+
+        <TextView
+            android:id="@+id/tvCiudadDestino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ciudad: Ciudad Falsa"
+            android:textSize="16sp"
+            android:textColor="#777" />
+
+        <TextView
+            android:id="@+id/tvEstadoDestino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Estado: Estado Falso"
+            android:textSize="16sp"
+            android:textColor="#777" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        >
+
+        <Button
+            android:id="@+id/btnVerDetalles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ver Detalles"
+            android:layout_marginEnd="8dp" />
+        <Button
+            android:id="@+id/btnCambiarEstado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cambiar Estado" />
+    </LinearLayout>
+</LinearLayout>

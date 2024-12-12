@@ -51,5 +51,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
-
+    implementation ("com.koushikdutta.ion:ion:2.1.1")
+    implementation ("com.google.code.gson:gson:2.11.0")
+    implementation ("com.koushikdutta.ion:ion:2.+")
 }

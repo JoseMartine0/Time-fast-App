@@ -23,71 +23,46 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botón Lista de Envíos -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnListaEnvios"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:layout_marginTop="152dp"
+        android:backgroundTint="@color/teal_700"
+        android:iconTint="@color/white"
         android:text="Lista de Envíos"
         android:textAllCaps="false"
-        android:iconTint="@color/white"
-        android:backgroundTint="@color/teal_700"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
-    <!-- Botón Detalle de Envío -->
+
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnDetalleEnvio"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Detalle de Envío"
-        android:textAllCaps="false"
-        android:iconTint="@color/white"
-        android:backgroundTint="@color/teal_700"
-        app:layout_constraintTop_toBottomOf="@id/btnListaEnvios"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Botón Actualizar Estado -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnActualizarEstado"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Actualizar Estado"
-        android:textAllCaps="false"
-        android:iconTint="@color/white"
-        android:backgroundTint="@color/teal_700"
-        app:layout_constraintTop_toBottomOf="@id/btnDetalleEnvio"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Botón Circular Actualizar Perfil -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnActualizarPerfil"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="98dp"
+        android:layout_height="110dp"
         android:layout_margin="16dp"
-        android:contentDescription="Actualizar Perfil"
+        android:layout_marginBottom="264dp"
         android:backgroundTint="@color/teal_700"
-        app:layout_constraintTop_toBottomOf="@id/btnActualizarEstado"
+        android:contentDescription="Actualizar Perfil"
+        app:layout_constraintBottom_toTopOf="@+id/btnCerrarSesion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btnListaEnvios" />
 
-    <!-- Botón Cerrar Sesión -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCerrarSesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:backgroundTint="@color/red"
+        android:iconTint="@color/white"
         android:text="Cerrar Sesión"
         android:textAllCaps="false"
-        android:iconTint="@color/white"
-        android:backgroundTint="@color/red"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
