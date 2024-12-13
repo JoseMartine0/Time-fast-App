@@ -66,7 +66,7 @@ class EnvioAdapter(private val estados: List<EstadoEnvio>, private val envios: L
             tvNumeroDestino.text = "Número: ${envio.numeroDestino}"
             tvColoniaDestino.text = "Colonia: ${envio.coloniaDestino}"
             tvCodigoPostalDestino.text = "Código Postal: ${envio.codigoPostalDestino}"
-            tvCiudadDestino.text = "Ciudad: ${envio.ciudadDestino}"
+            tvCiudadDestino.text = "Ciudad: ${envio.municipioDestino}"
             tvEstadoDestino.text = "Estado: ${envio.estadoDestino}"
 
             btnVerDetalles.setOnClickListener {

@@ -28,6 +28,7 @@ class MenuPrincipalActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
         binding.btnActualizarPerfil.setOnClickListener {
             val intent = Intent(this, ActualizarPerfilActivity::class.java).apply {
                 putExtra("colaborador", Gson().toJson(colaborador))

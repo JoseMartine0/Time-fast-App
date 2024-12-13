@@ -9,17 +9,30 @@
 
         <!-- Logo o imagen decorativa -->
         <ImageView
-            android:id="@+id/ivLogo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="40dp"
-            android:src="@drawable/ic_launcher_foreground"
-            android:contentDescription="Logo"
+            android:id="@+id/ivTopDecoration"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:src="@drawable/top_wave"
+            android:scaleType="fitXY"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="Decoración superior" />
 
-        <!-- Título del formulario -->
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/app_logo"
+        android:scaleType="centerCrop"
+        android:contentDescription="Logo"
+        app:shapeAppearanceOverlay="@style/CircularImageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Título del formulario -->
         <TextView
             android:id="@+id/tvLoginTitle"
             android:layout_width="wrap_content"
@@ -86,6 +99,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilContrasena"
         app:layout_constraintWidth_percent="0.9" />
+
+    <ImageView
+        android:id="@+id/ivBottomDecoration"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/bottom_wave"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="Decoración inferior" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

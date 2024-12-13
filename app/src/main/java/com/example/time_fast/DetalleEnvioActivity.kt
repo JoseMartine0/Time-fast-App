@@ -52,8 +52,8 @@ class DetalleEnvioActivity : AppCompatActivity() {
             binding.tvNombreCliente.text = "Cliente: ${envio.nombreClienteCompleto}"
             binding.tvTelefonoCliente.text = "Teléfono: ${envio.telefonoCliente}"
             binding.tvCorreoCliente.text = "Correo: ${envio.correoElectronicoCliente}"
-            binding.tvDireccionOrigen.text = "Origen: ${envio.calleOrigen}, ${envio.numeroOrigen}, ${envio.coloniaOrigen}, ${envio.codigoPostalOrigen}, ${envio.ciudadOrigen}, ${envio.estadoOrigen} "
-            binding.tvDireccionDestino.text = "Destino: ${envio.calleDestino}, ${envio.numeroDestino}, ${envio.coloniaDestino}, ${envio.codigoPostalDestino}, ${envio.ciudadDestino}, ${envio.estadoDestino} "
+            binding.tvDireccionOrigen.text = "Origen: ${envio.calleOrigen}, ${envio.numeroOrigen}, ${envio.coloniaOrigen}, ${envio.codigoPostalOrigen}, ${envio.municipioOrigen}, ${envio.estadoOrigen} "
+            binding.tvDireccionDestino.text = "Destino: ${envio.calleDestino}, ${envio.numeroDestino}, ${envio.coloniaDestino}, ${envio.codigoPostalDestino}, ${envio.municipioDestino}, ${envio.estadoDestino} "
 
     }
 }

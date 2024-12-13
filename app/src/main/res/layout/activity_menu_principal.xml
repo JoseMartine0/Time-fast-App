@@ -38,19 +38,24 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
 
+
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnActualizarPerfil"
-        android:layout_width="98dp"
-        android:layout_height="110dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:layout_marginBottom="264dp"
+        android:layout_marginBottom="152dp"
         android:backgroundTint="@color/teal_700"
+        android:iconTint="@color/white"
+        android:text="Actualizar Perfil"
         android:contentDescription="Actualizar Perfil"
-        app:layout_constraintBottom_toTopOf="@+id/btnCerrarSesion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnListaEnvios" />
+
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCerrarSesion"

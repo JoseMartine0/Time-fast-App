@@ -211,8 +211,23 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
+
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRegresar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Regresar"
+        android:layout_marginBottom="16dp"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:backgroundTint="@color/red"
+        app:layout_constraintStart_toStartOf="parent"/>
+
 
 
 
