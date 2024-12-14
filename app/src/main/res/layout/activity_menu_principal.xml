@@ -48,12 +48,27 @@
         android:layout_marginBottom="152dp"
         android:backgroundTint="@color/teal_700"
         android:iconTint="@color/white"
-        android:text="Actualizar Perfil"
-        android:contentDescription="Actualizar Perfil"
+        android:text="Actualizar datos"
+        android:contentDescription="Actualizar datos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnListaEnvios" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnVizualizarPerfil"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="152dp"
+        android:backgroundTint="@color/teal_700"
+        android:iconTint="@color/white"
+        android:text="Visualizar datos"
+        android:contentDescription="Actualizar datos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnActualizarPerfil" />
 
 
 

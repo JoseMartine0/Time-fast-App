@@ -36,6 +36,13 @@ class MenuPrincipalActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.btnVizualizarPerfil.setOnClickListener {
+            val intent = Intent(this, VisualizarPerfilActivity::class.java).apply {
+                putExtra("colaborador", Gson().toJson(colaborador))
+            }
+            startActivity(intent)
+        }
+
         binding.btnCerrarSesion.setOnClickListener {
             val intent = Intent(this, LoginColaborador::class.java)
             startActivity(intent)

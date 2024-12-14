@@ -1,7 +1,7 @@
 package com.example.time_fast.poko
 
 data class Colaborador(
-    var idColaborador: Int?,
+    var idColaborador: Int,
     var nombre: String,
     var apellidoPaterno: String,
     var apellidoMaterno: String,

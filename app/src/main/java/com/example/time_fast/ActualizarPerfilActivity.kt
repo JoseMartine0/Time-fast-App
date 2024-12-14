@@ -10,7 +10,11 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.time_fast.databinding.ActivityActualizarPerfilBinding
 import com.example.time_fast.databinding.ActivityListaEnviosBinding
 import com.example.time_fast.poko.Colaborador
+import com.example.time_fast.poko.Mensaje
+import com.example.time_fast.utils.Constantes
 import com.google.gson.Gson
+import com.koushikdutta.ion.Ion
+import java.nio.charset.Charset
 
 class ActualizarPerfilActivity : AppCompatActivity() {
 
@@ -28,6 +32,7 @@ class ActualizarPerfilActivity : AppCompatActivity() {
         binding.btnGuardar.setOnClickListener {
             if (validarCampos()) {
                 guardarCambios()
+
             } else {
                 Toast.makeText(this, "Campos invalidos", Toast.LENGTH_LONG).show()
             }
@@ -37,6 +42,7 @@ class ActualizarPerfilActivity : AppCompatActivity() {
         }
 
     }
+
 
 
 
@@ -52,6 +58,54 @@ class ActualizarPerfilActivity : AppCompatActivity() {
 
     private fun cargarDatosColaborador() {
         binding.etNombre.setText(colaborador.nombre)
+        binding.etApellidoPaterno.setText(colaborador.apellidoPaterno)
+        binding.etApellidoMaterno.setText(colaborador.apellidoMaterno)
+        binding.etCorreo.setText(colaborador.correoElectronico)
+        binding.etCURP.setText(colaborador.CURP)
+    }
+
+    private fun guardarCambios() {
+        colaborador.nombre = binding.etNombre.text.toString()
+        colaborador.apellidoPaterno = binding.etApellidoPaterno.text.toString()
+        colaborador.apellidoMaterno = binding.etApellidoMaterno.text.toString()
+        colaborador.correoElectronico = binding.etCorreo.text.toString()
+        colaborador.CURP = binding.etCURP.text.toString()
+
+        Ion.with(this)
+            .load("PUT", "${Constantes().URL_WS}colaboradores/editar")
+            .setJsonPojoBody(colaborador)
+            .asString(Charsets.UTF_8)
+            .setCallback{e,resutl ->
+                if (e == null){
+                    val gson = Gson()
+                    val mensaje = gson.fromJson(resutl, Mensaje::class.java)
+                    Toast.makeText(this, mensaje.contenido, Toast.LENGTH_LONG).show()
+
+                    if (!mensaje.error){
+                        val intent = Intent()
+                        intent.putExtra("Colaborador actualizado", Gson().toJson(colaborador))
+                        setResult(RESULT_OK, intent)
+                        finish()
+                    }
+                }else{
+                    Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                }
+            }
+    }
+
+    private fun validarCampos(): Boolean {
+        val nombre = binding.etNombre.text.toString()
+        val apellidoPaterno = binding.etApellidoPaterno.text.toString()
+        val apellidoMaterno = binding.etApellidoMaterno.text.toString()
+        val correoEllectronico = binding.etCorreo.text.toString()
+        val CURP = binding.etCURP.text.toString()
+        return nombre.isNotEmpty() && apellidoPaterno.isNotEmpty() && apellidoMaterno.isNotEmpty() && correoEllectronico.isNotEmpty() && CURP.isNotEmpty()
+
+    }
+
+    private fun cancelarEdicion() {
+        setResult(RESULT_CANCELED)
+        finish()
     }
 
 
