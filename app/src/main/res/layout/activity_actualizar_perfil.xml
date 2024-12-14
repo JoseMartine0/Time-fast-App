@@ -64,24 +64,6 @@
                 android:textColor="@color/white"
                 app:backgroundTint="@color/purple_500"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilIdColaborador"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintTop_toBottomOf="@id/btnCapturePhoto"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:hint="Id Colaborador">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etIdRol"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"/>
-            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilIdRol"
@@ -90,7 +72,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                app:layout_constraintTop_toBottomOf="@id/tilIdColaborador"
+                app:layout_constraintTop_toBottomOf="@id/btnCapturePhoto"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:hint="Id Rol">

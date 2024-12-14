@@ -1,5 +1,6 @@
 package com.example.time_fast
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -12,28 +13,46 @@ import com.example.time_fast.poko.Colaborador
 import com.google.gson.Gson
 
 class ActualizarPerfilActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityActualizarPerfilBinding
     private lateinit var colaborador: Colaborador
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         binding = ActivityActualizarPerfilBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_actualizar_perfil)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.actualizar)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        setContentView(binding.root)
+
+        obtenerDatosColaborador()
+        cargarDatosColaborador()
+
+        binding.btnGuardar.setOnClickListener {
+            if (validarCampos()) {
+                guardarCambios()
+            } else {
+                Toast.makeText(this, "Campos invalidos", Toast.LENGTH_LONG).show()
+            }
         }
+        binding.btnCancelar.setOnClickListener{
+            cancelarEdicion()
+        }
+
     }
+
+
+
     private fun obtenerDatosColaborador() {
-        val jsonCliente = intent.getStringExtra("colaborador")
-        if (jsonCliente != null) {
+        val jsonColaborador = intent.getStringExtra("colaborador")
+        if (jsonColaborador != null) {
             val gson = Gson()
-            colaborador = gson.fromJson(jsonCliente, Colaborador::class.java)
+            colaborador = gson.fromJson(jsonColaborador, Colaborador::class.java)
         } else {
             Toast.makeText(this, "Colaborador no encontrado. Por favor, inicie sesión nuevamente.", Toast.LENGTH_LONG).show()
-            finish()
         }
     }
+
+    private fun cargarDatosColaborador() {
+        binding.etNombre.setText(colaborador.nombre)
+    }
+
+
 }

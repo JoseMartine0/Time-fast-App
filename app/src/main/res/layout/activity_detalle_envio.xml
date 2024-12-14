@@ -8,9 +8,18 @@
     android:padding="16dp"
     tools:context=".DetalleEnvioActivity">
 
+    <ImageView
+        android:id="@+id/ivTopDecoration"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:src="@drawable/top_wave"
+        android:scaleType="fitXY"
+        android:contentDescription="Decoración superior" />
+
+
     <TextView
         android:id="@+id/tvTitle"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Detalle del Envío"
         android:textSize="24sp"
@@ -20,7 +29,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginTop="100dp"
+        app:layout_constraintTop_toBottomOf="@id/ivTopDecoration"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardDetalleEnvio"
@@ -38,6 +48,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
+
 
             <TextView
                 android:id="@+id/tvTituloCardDetalleEnvio"

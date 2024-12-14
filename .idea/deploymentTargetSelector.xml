@@ -17,7 +17,7 @@
       <SelectionState runConfigName="ActualizarPerfilActivity">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="VisualizarPerfilActivity">
+      <SelectionState runConfigName="ListaEnviosActivity">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

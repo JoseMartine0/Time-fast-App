@@ -6,7 +6,7 @@ data class Envio(
     val numeroGuia: String,
     val costo: Float,
     val descripcion: String,
-    var idEstado: Int,
+    val idEstado: Int,
     val idColaborador: Int,
     val nombreEstado: String,
 
