@@ -66,7 +66,7 @@ class ActualizarPerfilActivity : AppCompatActivity() {
 
     private fun obtenerFotoColaborador(idColaborador: Int){
         Ion.with(this@ActualizarPerfilActivity)
-            .load("GET, ${Constantes().URL_WS}colaborador/Obtener-Foto/${idColaborador}")
+            .load("GET, ${Constantes().URL_WS}colaborador/obtener-foto/${idColaborador}")
             .asString()
             .setCallback{e, result ->
                 if(e == null){
@@ -126,7 +126,7 @@ class ActualizarPerfilActivity : AppCompatActivity() {
 
     private fun subirFotoPerfil(idColaborador: Int) {
         Ion.with(this@ActualizarPerfilActivity)
-            .load("PUT", "${Constantes().URL_WS}colaborador/Subir-Foto/${idColaborador}")
+            .load("PUT", "${Constantes().URL_WS}colaborador/subir-foto/${idColaborador}")
             .setByteArrayBody(fotoPerfil)
             .asString()
             .setCallback { e, result ->
