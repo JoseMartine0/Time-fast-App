@@ -30,6 +30,10 @@ class ListaEnviosActivity : AppCompatActivity() {
         envioDao = EnviosDAO(this)
         obtenerDatosColaborador()
         cargarEnvios()
+
+        binding.btnRegresar.setOnClickListener{
+            cancelarEdicion()
+        }
     }
     private fun obtenerDatosColaborador() {
         val jsonCliente = intent.getStringExtra("colaborador")
@@ -76,7 +80,13 @@ class ListaEnviosActivity : AppCompatActivity() {
                     Toast.makeText(this, "Error al obtener envíos: $error", Toast.LENGTH_LONG).show()
                 }
             }
+
         )
+    }
+
+    private fun cancelarEdicion() {
+        setResult(RESULT_CANCELED)
+        finish()
     }
 
 
