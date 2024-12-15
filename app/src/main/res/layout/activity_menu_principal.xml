@@ -9,12 +9,24 @@
     android:background="@color/white"
     tools:context=".MenuPrincipalActivity">
 
+
+    <ImageView
+        android:id="@+id/ivTopDecoration"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:src="@drawable/top_wave"
+        android:scaleType="fitXY"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="Decoración superior" />
+
     <!-- Título principal -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="240dp"
         android:text="Menú Principal"
         android:textColor="@color/black"
         android:textSize="24sp"
@@ -40,20 +52,6 @@
 
 
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnActualizarPerfil"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginBottom="152dp"
-        android:backgroundTint="@color/teal_700"
-        android:iconTint="@color/white"
-        android:text="Actualizar datos"
-        android:contentDescription="Actualizar datos"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnListaEnvios" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnVizualizarPerfil"
@@ -68,7 +66,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnActualizarPerfil" />
+        app:layout_constraintTop_toBottomOf="@+id/btnListaEnvios" />
 
 
 
@@ -76,13 +74,26 @@
         android:id="@+id/btnCerrarSesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginTop="200dp"
         android:backgroundTint="@color/red"
         android:iconTint="@color/white"
         android:text="Cerrar Sesión"
         android:textAllCaps="false"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivBottomDecoration"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/bottom_wave"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="Decoración inferior" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

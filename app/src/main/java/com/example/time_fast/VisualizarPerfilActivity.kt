@@ -18,6 +18,7 @@ import com.koushikdutta.ion.Ion
 import android.util.Base64
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.time_fast.poko.Mensaje
 import java.io.ByteArrayOutputStream
@@ -34,6 +35,13 @@ class VisualizarPerfilActivity : AppCompatActivity() {
         binding = ActivityVizualizarPerfilBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val btnRegresarMenu = findViewById<Button>(R.id.btnRegresarMenu)
+        btnRegresarMenu.setOnClickListener{
+            val intent = Intent(this, MenuPrincipalActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         obtenerDatos()
         cargarDatos()
 
@@ -42,6 +50,8 @@ class VisualizarPerfilActivity : AppCompatActivity() {
             intent.putExtra("colaborador", Gson().toJson(colaborador))
             startActivityForResult(intent, REQUEST_ACTUALIZAR_COLABORADOR)
         }
+
+
 
 
     }
@@ -169,5 +179,10 @@ class VisualizarPerfilActivity : AppCompatActivity() {
 
     companion object{
         private const val REQUEST_ACTUALIZAR_COLABORADOR = 1
+    }
+
+    private fun cancelarEdicion() {
+        setResult(RESULT_CANCELED)
+        finish()
     }
 }

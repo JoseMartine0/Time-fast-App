@@ -319,15 +319,33 @@
                 </androidx.cardview.widget.CardView>
 
 
+                <Button
+                    android:id="@+id/btnRegresarMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Regresar al Menú Principal"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="32dp"
+                    android:backgroundTint="@color/red"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
 
 
-
-
+                <ImageView
+                    android:id="@+id/ivBottomDecoration"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:src="@drawable/bottom_wave"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toBottomOf="@id/btnRegresarMenu"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:contentDescription="Decoración inferior"
+                    android:layout_marginTop="16dp" />
 
             </LinearLayout>
 
         </FrameLayout>
-
 
     </ScrollView>
 

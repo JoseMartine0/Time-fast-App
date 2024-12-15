@@ -8,6 +8,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.time_fast.dao.LoginDAO
 import com.example.time_fast.databinding.ActivityLoginColaboradorBinding
+import com.example.time_fast.poko.Colaborador
+import com.google.gson.Gson
 
 class LoginColaborador : AppCompatActivity() {
 
@@ -64,11 +66,18 @@ class LoginColaborador : AppCompatActivity() {
     }
     private fun realizarLogin(numeroPersonal: String, password: String) {
         loginDAO.loginPorNumeroPersonal(numeroPersonal, password, { colaboradorJSON ->
+                val colaborador = Gson().fromJson(colaboradorJSON, Colaborador::class.java)
+
+            if(colaborador.idRol == 3){
                 val intent = Intent(this, MenuPrincipalActivity::class.java)
                 intent.putExtra("colaborador", colaboradorJSON)
                 startActivity(intent)
                 finish()
                 Toast.makeText(this, "Inicio exitoso", Toast.LENGTH_LONG).show()
+            }else{
+                Toast.makeText(this, "Acceso denegado, solo permitido para colaboradores con Rol 3", Toast.LENGTH_LONG).show()
+            }
+
             },
             { error ->
                 Toast.makeText(this, "Error: $error", Toast.LENGTH_LONG).show()
