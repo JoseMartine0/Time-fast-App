@@ -1,9 +1,15 @@
 package com.example.time_fast
 
+import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.util.Base64
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -14,12 +20,15 @@ import com.example.time_fast.poko.Mensaje
 import com.example.time_fast.utils.Constantes
 import com.google.gson.Gson
 import com.koushikdutta.ion.Ion
+import java.io.ByteArrayOutputStream
+import java.io.InputStream
 import java.nio.charset.Charset
 
 class ActualizarPerfilActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityActualizarPerfilBinding
     private lateinit var colaborador: Colaborador
+    private var fotoPerfil: ByteArray?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +37,8 @@ class ActualizarPerfilActivity : AppCompatActivity() {
 
         obtenerDatosColaborador()
         cargarDatosColaborador()
+
+
 
         binding.btnGuardar.setOnClickListener {
             if (validarCampos()) {
@@ -43,8 +54,94 @@ class ActualizarPerfilActivity : AppCompatActivity() {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        obtenerFotoColaborador(colaborador.idColaborador)
+        binding.btnCapturePhoto.setOnClickListener{
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            seleccionarFotoPerfil.launch(intent)
+        }
+    }
 
+    private fun obtenerFotoColaborador(idColaborador: Int){
+        Ion.with(this@ActualizarPerfilActivity)
+            .load("GET, ${Constantes().URL_WS}colaborador/Obtener-Foto/${idColaborador}")
+            .asString()
+            .setCallback{e, result ->
+                if(e == null){
+                    cargarFotoColaborador(result)
+                }else{
+                    Toast.makeText(this@ActualizarPerfilActivity, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                }
+            }
+    }
 
+    private fun cargarFotoColaborador(json: String){
+        if(json.isNotEmpty()){
+            val gson = Gson()
+            val colaboradorFoto = gson.fromJson(json, Colaborador::class.java)
+            if (colaboradorFoto.fotoBase64 != null){
+                try {
+                    val imgBytes = Base64.decode(colaboradorFoto.fotoBase64, Base64.DEFAULT)
+                    val imgBitmap = BitmapFactory.decodeByteArray(imgBytes, 0, imgBytes.size)
+                    binding.ivProfileImage.setImageBitmap(imgBitmap)
+                }catch (e: Exception){
+                    Toast.makeText(this@ActualizarPerfilActivity,  "Error img: ${e.message}", Toast.LENGTH_LONG).show()
+                }
+            }else{
+                Toast.makeText(this@ActualizarPerfilActivity, "No cuenta con una foto de perfil", Toast.LENGTH_LONG).show()
+
+            }
+        }
+    }
+
+    private val seleccionarFotoPerfil = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data = result.data
+            val imgURI = data?.data
+            if (imgURI != null) {
+                fotoPerfil = uriToByteArray(imgURI)
+                if (fotoPerfil != null) {
+                    subirFotoPerfil(colaborador.idColaborador)
+                }
+            }
+        }
+    }
+
+    private fun uriToByteArray(uri: Uri): ByteArray? {
+        return try {
+            val inputStream: InputStream? = contentResolver.openInputStream(uri)
+            val bitmap = BitmapFactory.decodeStream(inputStream)
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+            byteArrayOutputStream.toByteArray()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    private fun subirFotoPerfil(idColaborador: Int) {
+        Ion.with(this@ActualizarPerfilActivity)
+            .load("PUT", "${Constantes().URL_WS}colaborador/Subir-Foto/${idColaborador}")
+            .setByteArrayBody(fotoPerfil)
+            .asString()
+            .setCallback { e, result ->
+                if (e == null) {
+                    val gson = Gson()
+                    val mensaje = gson.fromJson(result, Mensaje::class.java)
+                    Toast.makeText(this@ActualizarPerfilActivity, mensaje.contenido, Toast.LENGTH_LONG).show()
+                    if (!mensaje.error) {
+                        obtenerFotoColaborador(colaborador.idColaborador)
+                    }
+                } else {
+                    Toast.makeText(this@ActualizarPerfilActivity, e.message, Toast.LENGTH_LONG).show()
+                }
+            }
+    }
 
     private fun obtenerDatosColaborador() {
         val jsonColaborador = intent.getStringExtra("colaborador")
@@ -107,6 +204,8 @@ class ActualizarPerfilActivity : AppCompatActivity() {
         setResult(RESULT_CANCELED)
         finish()
     }
+
+
 
 
 }

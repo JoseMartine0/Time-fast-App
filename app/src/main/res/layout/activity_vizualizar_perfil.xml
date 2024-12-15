@@ -27,7 +27,7 @@
 
             <!-- Botón para actualizar perfil -->
             <ImageButton
-                android:id="@+id/btnActualizarPerfil"
+                android:id="@+id/ivActualizarPerfil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|top"
