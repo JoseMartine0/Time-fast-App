@@ -39,7 +39,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="16dp">
 
@@ -47,12 +47,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Detalles del Colaborador"
-                    android:textSize="24sp"
-                    android:layout_marginTop="85dp"
-                    android:textColor="@color/black"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="16dp" />
+                    android:layout_marginBottom="16dp"
+                    android:text="Detalles del Colaborador"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
 
                 <!-- Imagen de perfil -->
                 <ImageView
@@ -60,12 +59,15 @@
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_default_profile"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/rounded_border"
                     android:contentDescription="Foto de perfil"
                     android:scaleType="centerCrop"
-                    android:layout_marginBottom="16dp" />
+                    android:src="@drawable/ic_default_profile" />
 
-                <!-- Datos del colaborador en CardViews -->
+                <!-- Datos del colaborador -->
+
+                <!-- Nombre -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -82,37 +84,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="ID Colaborador:"
-                            android:textStyle="bold"
-                            android:textColor="@color/black" />
-                        <TextView
-                            android:id="@+id/tvIdColaborador"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="12345"
-                            android:textColor="@color/black" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                            android:text="Nombre :"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Nombre:"
-                            android:textStyle="bold"
-                            android:textColor="@color/black" />
                         <TextView
                             android:id="@+id/tvNombre"
                             android:layout_width="wrap_content"
@@ -122,6 +97,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <!-- Correo Electrónico -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -138,65 +114,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Apellido Paterno:"
-                            android:textStyle="bold"
-                            android:textColor="@color/black" />
-                        <TextView
-                            android:id="@+id/tvApellidoPaterno"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Pérez"
-                            android:textColor="@color/black" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                            android:text="Correo Electrónico :"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Apellido Materno:"
-                            android:textStyle="bold"
-                            android:textColor="@color/black" />
-                        <TextView
-                            android:id="@+id/tvApellidoMaterno"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="González"
-                            android:textColor="@color/black" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Correo Electrónico:"
-                            android:textStyle="bold"
-                            android:textColor="@color/black" />
                         <TextView
                             android:id="@+id/tvCorreoElectronico"
                             android:layout_width="wrap_content"
@@ -206,6 +127,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <!-- Número Personal -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -222,9 +144,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Número Personal:"
-                            android:textStyle="bold"
-                            android:textColor="@color/black" />
+                            android:text="Número Personal :"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
                         <TextView
                             android:id="@+id/tvNumeroPersonal"
                             android:layout_width="wrap_content"
@@ -234,6 +157,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <!-- CURP -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -251,8 +175,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="CURP:"
-                            android:textStyle="bold"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
                         <TextView
                             android:id="@+id/tvCURP"
                             android:layout_width="wrap_content"
@@ -262,34 +187,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="IdRol:"
-                            android:textStyle="bold"
-                            android:textColor="@color/black" />
-                        <TextView
-                            android:id="@+id/tvidRol"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="1"
-                            android:textColor="@color/black" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
+                <!-- Rol -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -307,41 +205,27 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Rol:"
-                            android:textStyle="bold"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
                         <TextView
                             android:id="@+id/tvRol"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Colaborador"
+                            android:text="Gerente"
                             android:textColor="@color/black" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-
+                <!-- Botón para regresar -->
                 <Button
                     android:id="@+id/btnRegresarMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Regresar al Menú Principal"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="32dp"
                     android:backgroundTint="@color/red"
+                    android:text="Regresar al Menú Principal"
                     android:textColor="@android:color/white"
                     android:textStyle="bold" />
-
-
-                <ImageView
-                    android:id="@+id/ivBottomDecoration"
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:src="@drawable/bottom_wave"
-                    android:scaleType="fitXY"
-                    app:layout_constraintBottom_toBottomOf="@id/btnRegresarMenu"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:contentDescription="Decoración inferior"
-                    android:layout_marginTop="16dp" />
 
             </LinearLayout>
 

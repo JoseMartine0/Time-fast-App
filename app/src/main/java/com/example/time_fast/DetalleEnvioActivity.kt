@@ -47,7 +47,7 @@ class DetalleEnvioActivity : AppCompatActivity() {
     }
 
     private fun mostrarDetalleEnvio() {
-        binding.tvEstado.text = "${envio.idEstado}"
+        binding.tvEstado.text = "${envio.idEstadoEnvio}"
         binding.tvNumeroGuia.text = envio.numeroGuia
         binding.tvCosto.text = envio.costo.toString()
         binding.tvNombreCliente.text = envio.nombreClienteCompleto

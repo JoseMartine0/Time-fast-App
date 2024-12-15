@@ -33,7 +33,7 @@ class EnviosDAO (private val context: Context){
     }
     fun obtenerEstados(onSuccess: (List<EstadoEnvio>) -> Unit, onError: (String) -> Unit) {
         Ion.with(context)
-            .load("GET", "${Constantes().URL_WS}estados/todos/")
+            .load("GET", "${Constantes().URL_WS}estados/todo")
             .asString()
             .setCallback { e, result ->
                 if (e == null && result != null) {

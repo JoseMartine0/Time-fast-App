@@ -8,7 +8,7 @@ data class Colaborador(
     var numeroPersonal: String,
     var correoElectronico: String,
     var password: String,
-    var CURP: String,
+   var CURP: String,
     var idRol: Int,
     var rol: String,
     var fotoBase64: String?

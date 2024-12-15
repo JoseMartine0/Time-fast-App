@@ -13,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.time_fast.dao.ColaboradorDAO
 import com.example.time_fast.databinding.ActivityActualizarPerfilBinding
 import com.example.time_fast.databinding.ActivityListaEnviosBinding
 import com.example.time_fast.poko.Colaborador
@@ -25,10 +26,10 @@ import java.io.InputStream
 import java.nio.charset.Charset
 
 class ActualizarPerfilActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityActualizarPerfilBinding
     private lateinit var colaborador: Colaborador
-    private var fotoPerfil: ByteArray?=null
+    private var fotoPerfil: ByteArray? = null
+    private var imgURI: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,78 +39,51 @@ class ActualizarPerfilActivity : AppCompatActivity() {
         obtenerDatosColaborador()
         cargarDatosColaborador()
 
-
-
         binding.btnGuardar.setOnClickListener {
             if (validarCampos()) {
                 guardarCambios()
-
             } else {
-                Toast.makeText(this, "Campos invalidos", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Campos inválidos", Toast.LENGTH_LONG).show()
             }
         }
-        binding.btnCancelar.setOnClickListener{
+
+        binding.btnCancelar.setOnClickListener {
             cancelarEdicion()
         }
-
     }
 
     override fun onStart() {
         super.onStart()
         obtenerFotoColaborador(colaborador.idColaborador)
-        binding.btnCapturePhoto.setOnClickListener{
+
+        binding.btnCapturePhoto.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             seleccionarFotoPerfil.launch(intent)
         }
     }
 
-    private fun obtenerFotoColaborador(idColaborador: Int){
-        Ion.with(this@ActualizarPerfilActivity)
-            .load("GET, ${Constantes().URL_WS}colaborador/obtener-foto/${idColaborador}")
-            .asString()
-            .setCallback{e, result ->
-                if(e == null){
-                    cargarFotoColaborador(result)
-                }else{
-                    Toast.makeText(this@ActualizarPerfilActivity, "Error: ${e.message}", Toast.LENGTH_LONG).show()
-                }
-            }
+    private fun obtenerFotoColaborador(idColaborador: Int) {
+        val dao = ColaboradorDAO(this)
+        dao.obtenerFoto(idColaborador, { bitmap ->
+            binding.ivProfileImage.setImageBitmap(bitmap)
+        }, { error ->
+            binding.ivProfileImage.setImageResource(R.drawable.app_logo)
+        })
     }
 
-    private fun cargarFotoColaborador(json: String){
-        if(json.isNotEmpty()){
-            val gson = Gson()
-            val colaboradorFoto = gson.fromJson(json, Colaborador::class.java)
-            if (colaboradorFoto.fotoBase64 != null){
-                try {
-                    val imgBytes = Base64.decode(colaboradorFoto.fotoBase64, Base64.DEFAULT)
-                    val imgBitmap = BitmapFactory.decodeByteArray(imgBytes, 0, imgBytes.size)
-                    binding.ivProfileImage.setImageBitmap(imgBitmap)
-                }catch (e: Exception){
-                    Toast.makeText(this@ActualizarPerfilActivity,  "Error img: ${e.message}", Toast.LENGTH_LONG).show()
-                }
-            }else{
-                Toast.makeText(this@ActualizarPerfilActivity, "No cuenta con una foto de perfil", Toast.LENGTH_LONG).show()
 
-            }
-        }
-    }
-
-    private val seleccionarFotoPerfil = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
+    private val seleccionarFotoPerfil = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val data = result.data
-            val imgURI = data?.data
+            imgURI = data?.data  // Asigna la URI a imgURI
+
             if (imgURI != null) {
-                fotoPerfil = uriToByteArray(imgURI)
-                if (fotoPerfil != null) {
-                    subirFotoPerfil(colaborador.idColaborador)
-                }
+                fotoPerfil = uriToByteArray(imgURI!!)
             }
         }
     }
+
 
     private fun uriToByteArray(uri: Uri): ByteArray? {
         return try {
@@ -125,22 +99,18 @@ class ActualizarPerfilActivity : AppCompatActivity() {
     }
 
     private fun subirFotoPerfil(idColaborador: Int) {
-        Ion.with(this@ActualizarPerfilActivity)
-            .load("PUT", "${Constantes().URL_WS}colaborador/subir-foto/${idColaborador}")
-            .setByteArrayBody(fotoPerfil)
-            .asString()
-            .setCallback { e, result ->
-                if (e == null) {
-                    val gson = Gson()
-                    val mensaje = gson.fromJson(result, Mensaje::class.java)
-                    Toast.makeText(this@ActualizarPerfilActivity, mensaje.contenido, Toast.LENGTH_LONG).show()
-                    if (!mensaje.error) {
-                        obtenerFotoColaborador(colaborador.idColaborador)
-                    }
-                } else {
-                    Toast.makeText(this@ActualizarPerfilActivity, e.message, Toast.LENGTH_LONG).show()
+        if (fotoPerfil != null) {
+            val dao = ColaboradorDAO(this)
+            dao.subirFoto(idColaborador, fotoPerfil!!,
+                { mensaje ->
+                    Toast.makeText(this, "Foto actualizada correctamente", Toast.LENGTH_LONG).show()
+                    obtenerFotoColaborador(idColaborador)  // Actualiza la foto en la UI
+                },
+                { error ->
+                    Toast.makeText(this, "Error al subir la foto: $error", Toast.LENGTH_LONG).show()
                 }
-            }
+            )
+        }
     }
 
     private fun obtenerDatosColaborador() {
@@ -159,8 +129,17 @@ class ActualizarPerfilActivity : AppCompatActivity() {
         binding.etApellidoMaterno.setText(colaborador.apellidoMaterno)
         binding.etCorreo.setText(colaborador.correoElectronico)
         binding.etCURP.setText(colaborador.CURP)
-    }
 
+        val dao = ColaboradorDAO(this)
+        dao.obtenerFoto(colaborador.idColaborador,
+            { bitmap ->
+                binding.ivProfileImage.setImageBitmap(bitmap)
+            },
+            { error ->
+                Toast.makeText(this, "Error al cargar la foto: $error", Toast.LENGTH_SHORT).show()
+            }
+        )
+    }
     private fun guardarCambios() {
         colaborador.nombre = binding.etNombre.text.toString()
         colaborador.apellidoPaterno = binding.etApellidoPaterno.text.toString()
@@ -168,44 +147,37 @@ class ActualizarPerfilActivity : AppCompatActivity() {
         colaborador.correoElectronico = binding.etCorreo.text.toString()
         colaborador.CURP = binding.etCURP.text.toString()
 
-        Ion.with(this)
-            .load("PUT", "${Constantes().URL_WS}colaboradores/editar")
-            .setJsonPojoBody(colaborador)
-            .asString(Charsets.UTF_8)
-            .setCallback{e,resutl ->
-                if (e == null){
-                    val gson = Gson()
-                    val mensaje = gson.fromJson(resutl, Mensaje::class.java)
-                    Toast.makeText(this, mensaje.contenido, Toast.LENGTH_LONG).show()
+        val dao = ColaboradorDAO(this)
 
-                    if (!mensaje.error){
-                        val intent = Intent()
-                        intent.putExtra("Colaborador actualizado", Gson().toJson(colaborador))
-                        setResult(RESULT_OK, intent)
-                        finish()
-                    }
-                }else{
-                    Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+        dao.ActualizarColaborador(colaborador,
+            { mensaje ->
+                Toast.makeText(this, mensaje.contenido, Toast.LENGTH_LONG).show()
+                if (fotoPerfil != null) {
+                    subirFotoPerfil(colaborador.idColaborador)
                 }
+            },
+            { error ->
+                Toast.makeText(this, error, Toast.LENGTH_LONG).show()
             }
+        )
     }
+
 
     private fun validarCampos(): Boolean {
         val nombre = binding.etNombre.text.toString()
         val apellidoPaterno = binding.etApellidoPaterno.text.toString()
         val apellidoMaterno = binding.etApellidoMaterno.text.toString()
-        val correoEllectronico = binding.etCorreo.text.toString()
+        val correoElectronico = binding.etCorreo.text.toString()
         val CURP = binding.etCURP.text.toString()
-        return nombre.isNotEmpty() && apellidoPaterno.isNotEmpty() && apellidoMaterno.isNotEmpty() && correoEllectronico.isNotEmpty() && CURP.isNotEmpty()
 
+        return nombre.isNotEmpty() && apellidoPaterno.isNotEmpty() &&
+                apellidoMaterno.isNotEmpty() && correoElectronico.isNotEmpty() &&
+                CURP.isNotEmpty()
     }
 
     private fun cancelarEdicion() {
         setResult(RESULT_CANCELED)
         finish()
     }
-
-
-
 
 }

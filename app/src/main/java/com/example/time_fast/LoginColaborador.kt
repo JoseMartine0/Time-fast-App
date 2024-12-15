@@ -75,7 +75,7 @@ class LoginColaborador : AppCompatActivity() {
                 finish()
                 Toast.makeText(this, "Inicio exitoso", Toast.LENGTH_LONG).show()
             }else{
-                Toast.makeText(this, "Acceso denegado, solo permitido para colaboradores con Rol 3", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Acceso denegado, solo permitido para conductores", Toast.LENGTH_LONG).show()
             }
 
             },

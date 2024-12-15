@@ -3,6 +3,7 @@ package com.example.time_fast.adapters
 import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,13 +56,13 @@ class EnvioAdapter(private val estados: List<EstadoEnvio>, private val envios: L
         private val btnCambiarEstado: Button = itemView.findViewById(R.id.btnCambiarEstado)
 
         fun bind(envio: Envio) {
-            if (envio.idEstado == 5 || envio.idEstado == 3){
+            if (envio.idEstadoEnvio == 5 || envio.idEstadoEnvio == 3){
                 tvDescripcion.text = "Descripcion: ${envio.descripcion}"
             }
             tvNumeroGuia.text = "Número de guía: ${envio.numeroGuia}"
             tvNombreCompletoCliente.text = "Cliente: ${envio.nombreClienteCompleto}"
             tvCorreoCliente.text = "Correo: ${envio.correoElectronicoCliente}"
-            tvEstado.text = "Estado: ${envio.nombreEstado}"
+            tvEstado.text = "Estado: ${envio.nombreEstadoEnvio}"
             tvCalleDestino.text = "Calle: ${envio.calleDestino}"
             tvNumeroDestino.text = "Número: ${envio.numeroDestino}"
             tvColoniaDestino.text = "Colonia: ${envio.coloniaDestino}"
@@ -92,7 +93,7 @@ class EnvioAdapter(private val estados: List<EstadoEnvio>, private val envios: L
             spinner.adapter = adapter
 
             editTextDescripcion.visibility = View.GONE
-            spinner.setSelection(envio.idEstado -1 )
+            spinner.setSelection(envio.idEstadoEnvio - 1 )
 
             spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
@@ -125,7 +126,7 @@ class EnvioAdapter(private val estados: List<EstadoEnvio>, private val envios: L
                     val id = estadosMap[estadoSeleccionado.nombre] ?: 0
                     val descripcion = editTextDescripcion.text.toString()
 
-                    envioDao.actualizarEstadoEnvio(envio.idEnvio, id, descripcion,
+                    envioDao.actualizarEstadoEnvio(envio.idEstadoEnvio, id, descripcion,
                         { respuesta ->
                             if (!respuesta.error) {
                                 Toast.makeText(itemView.context, respuesta.contenido, Toast.LENGTH_SHORT).show()

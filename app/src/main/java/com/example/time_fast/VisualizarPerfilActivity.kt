@@ -20,6 +20,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
+import com.example.time_fast.dao.ColaboradorDAO
 import com.example.time_fast.poko.Mensaje
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
@@ -69,15 +70,17 @@ class VisualizarPerfilActivity : AppCompatActivity() {
     }
 
     private fun cargarDatos() {
-        binding.tvIdColaborador.setText(colaborador.idColaborador.toString())
-        binding.tvNombre.setText(colaborador.nombre)
-        binding.tvApellidoPaterno.setText(colaborador.apellidoPaterno)
-        binding.tvApellidoMaterno.setText(colaborador.apellidoMaterno)
+        binding.tvNombre.setText(colaborador.nombre + " "+  colaborador.apellidoPaterno +" "+ colaborador.apellidoMaterno)
         binding.tvCorreoElectronico.setText(colaborador.correoElectronico)
         binding.tvCURP.setText(colaborador.CURP)
         binding.tvNumeroPersonal.setText(colaborador.numeroPersonal)
-        binding.tvidRol.setText(colaborador.idRol.toString())
         binding.tvRol.setText(colaborador.rol.toString())
+        val dao = ColaboradorDAO(this)
+        dao.obtenerFoto(colaborador.idColaborador, { bitmap ->
+            binding.ivProfileImage.setImageBitmap(bitmap)
+        }, { error ->
+            binding.ivProfileImage.setImageResource(R.drawable.app_logo)
+        })
     }
 
     companion object{
@@ -88,6 +91,5 @@ class VisualizarPerfilActivity : AppCompatActivity() {
         setResult(RESULT_CANCELED)
         finish()
     }
-
 
 }
