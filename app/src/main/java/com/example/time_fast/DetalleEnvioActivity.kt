@@ -21,6 +21,10 @@ class DetalleEnvioActivity : AppCompatActivity() {
         binding = ActivityDetalleEnvioBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.btnRegresar.setOnClickListener{
+            cancelarEdicion()
+        }
+
         obtenerEnvio()
         mostrarDetalleEnvio()
 
@@ -55,5 +59,10 @@ class DetalleEnvioActivity : AppCompatActivity() {
         binding.tvDireccionOrigen.text = "${envio.calleOrigen}, ${envio.numeroOrigen}, ${envio.coloniaOrigen}, ${envio.codigoPostalOrigen}, ${envio.municipioOrigen}, ${envio.estadoOrigen} "
         binding.tvDireccionDestino.text = "${envio.calleDestino}, ${envio.numeroDestino}, ${envio.coloniaDestino}, ${envio.codigoPostalDestino}, ${envio.municipioDestino}, ${envio.estadoDestino} "
 
+    }
+
+    private fun cancelarEdicion() {
+        setResult(RESULT_CANCELED)
+        finish()
     }
 }
