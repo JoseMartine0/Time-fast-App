@@ -11,5 +11,7 @@ data class Colaborador(
    var CURP: String,
     var idRol: Int,
     var rol: String,
-    var fotoBase64: String?
+    var fotoBase64: String?,
+    var numeroLicencia: String,
+    var activo: Boolean
 )

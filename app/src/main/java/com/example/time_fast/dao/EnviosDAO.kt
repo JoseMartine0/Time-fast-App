@@ -62,7 +62,7 @@ class EnviosDAO (private val context: Context){
             .load("PUT", "${Constantes().URL_WS}envios/actualizarEstado")
             .setHeader("Content-Type", "application/x-www-form-urlencoded")
             .setBodyParameter("idEnvio", idEnvio.toString())
-            .setBodyParameter("idEstado", idEstado.toString())
+            .setBodyParameter("idEstadoEnvio", idEstado.toString())
             .setBodyParameter("descripcion", descripcion ?: "")
             .asString()
             .setCallback { e, result ->

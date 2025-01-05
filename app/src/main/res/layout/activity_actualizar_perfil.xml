@@ -66,6 +66,23 @@
                 app:backgroundTint="@color/purple_500" />
 
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilNumeroLicencia"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tilCURP"
+                app:layout_constraintStart_toStartOf="@id/tilNombre"
+                app:layout_constraintEnd_toEndOf="@id/tilNombre"
+                android:layout_marginTop="16dp"
+                android:hint="Número de Licencia">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNumeroLicencia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLength="20" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilNombre"
@@ -101,6 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"/>
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -117,7 +135,8 @@
                     android:id="@+id/etApellidoMaterno"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"/>
+                    android:inputType="textPersonName" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -151,6 +170,7 @@
                     android:id="@+id/etCURP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
@@ -158,12 +178,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Guardar Cambios"
-                app:layout_constraintTop_toBottomOf="@id/tilCURP"
-                app:layout_constraintStart_toStartOf="@id/tilNombre"
-                app:layout_constraintEnd_toEndOf="@id/tilNombre"
-                android:layout_marginTop="32dp"
                 android:textColor="@color/white"
-                app:backgroundTint="@color/purple_500"/>
+                app:backgroundTint="@color/purple_500"
+                app:layout_constraintEnd_toEndOf="@id/tilNumeroLicencia"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/tilNumeroLicencia"
+                app:layout_constraintTop_toBottomOf="@+id/tilNumeroLicencia" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCancelar"

@@ -2,28 +2,12 @@ package com.example.time_fast
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.time_fast.databinding.ActivityMenuPrincipalBinding
 import com.example.time_fast.databinding.ActivityVizualizarPerfilBinding
 import com.example.time_fast.poko.Colaborador
-import com.example.time_fast.utils.Constantes
 import com.google.gson.Gson
-import com.koushikdutta.ion.Ion
-import android.util.Base64
-import android.graphics.BitmapFactory
-import android.net.Uri
-import android.widget.Button
-import androidx.activity.result.contract.ActivityResultContracts
 import com.example.time_fast.dao.ColaboradorDAO
-import com.example.time_fast.poko.Mensaje
-import java.io.ByteArrayOutputStream
-import java.io.InputStream
 
 class VisualizarPerfilActivity : AppCompatActivity() {
 
@@ -74,7 +58,7 @@ class VisualizarPerfilActivity : AppCompatActivity() {
         binding.tvCorreoElectronico.setText(colaborador.correoElectronico)
         binding.tvCURP.setText(colaborador.CURP)
         binding.tvNumeroPersonal.setText(colaborador.numeroPersonal)
-        binding.tvRol.setText(colaborador.rol.toString())
+        binding.tvNumeroLicencia.setText(colaborador.numeroLicencia)
         val dao = ColaboradorDAO(this)
         dao.obtenerFoto(colaborador.idColaborador, { bitmap ->
             binding.ivProfileImage.setImageBitmap(bitmap)

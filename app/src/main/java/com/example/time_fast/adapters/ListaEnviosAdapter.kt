@@ -92,41 +92,37 @@ class EnvioAdapter(private val estados: List<EstadoEnvio>, private val envios: L
             val adapter = ArrayAdapter(itemView.context, android.R.layout.simple_spinner_item, nombresEstados)
             spinner.adapter = adapter
 
-            editTextDescripcion.visibility = View.GONE
+            if(envio.idEstadoEnvio ==3 || envio.idEstadoEnvio == 5){
+                editTextDescripcion.isEnabled = true
+                editTextDescripcion.setText(envio.descripcion)
+            }else{
+                editTextDescripcion.isEnabled = false
+                editTextDescripcion.setText("Sin cambios")
+            }
             spinner.setSelection(envio.idEstadoEnvio - 1 )
 
             spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                     val estadoSeleccionado = estados[position]
-                    if (estadoSeleccionado.nombre == "cancelado" || estadoSeleccionado.nombre == "detenido") {
-                        editTextDescripcion.visibility = View.VISIBLE
+                    if (estadoSeleccionado.idEstadoEnvio == 5 || estadoSeleccionado.idEstadoEnvio == 3) {
+                        editTextDescripcion.isEnabled = true
+                        editTextDescripcion.setText("")
                     } else {
-                        editTextDescripcion.visibility = View.GONE
-                        editTextDescripcion.text.clear()
+                        editTextDescripcion.isEnabled = false
+                        editTextDescripcion.setText("Sin cambios")
                     }
-                    // Guarda la posición del elemento seleccionado
-                    val idEstado = estadoSeleccionado.idEstadoEnvio
-                    println(idEstado)
                 }
-
                 override fun onNothingSelected(parent: AdapterView<*>) {
                 }
             }
-            val estadosMap = mapOf(
-                "pendiente" to 1,
-                "en transito" to 2,
-                "detenido" to 3,
-                "entregado" to 4,
-                "cancelado" to 5
-            )
             val btnGuardar = dialog.findViewById<Button>(R.id.btn_guardar_estado)
             btnGuardar.setOnClickListener {
-                if (spinner.selectedItem != null) {
+                 if (spinner.selectedItem != null) {
                     val estadoSeleccionado = estados[spinner.selectedItemPosition]
-                    val id = estadosMap[estadoSeleccionado.nombre] ?: 0
-                    val descripcion = editTextDescripcion.text.toString()
+                    val id =  estadoSeleccionado.idEstadoEnvio
+                     val descripcion = editTextDescripcion.text.toString()
 
-                    envioDao.actualizarEstadoEnvio(envio.idEstadoEnvio, id, descripcion,
+                    envioDao.actualizarEstadoEnvio(envio.idEnvio, id, descripcion,
                         { respuesta ->
                             if (!respuesta.error) {
                                 Toast.makeText(itemView.context, respuesta.contenido, Toast.LENGTH_SHORT).show()

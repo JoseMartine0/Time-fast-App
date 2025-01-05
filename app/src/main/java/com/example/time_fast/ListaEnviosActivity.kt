@@ -30,6 +30,9 @@ class ListaEnviosActivity : AppCompatActivity() {
         envioDao = EnviosDAO(this)
         obtenerDatosColaborador()
         cargarEnvios()
+        binding.btnRegresar.setOnClickListener {
+            finish()
+        }
     }
     private fun obtenerDatosColaborador() {
         val jsonCliente = intent.getStringExtra("colaborador")

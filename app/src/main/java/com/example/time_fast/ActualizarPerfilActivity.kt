@@ -6,24 +6,15 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.util.Base64
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.time_fast.dao.ColaboradorDAO
 import com.example.time_fast.databinding.ActivityActualizarPerfilBinding
-import com.example.time_fast.databinding.ActivityListaEnviosBinding
 import com.example.time_fast.poko.Colaborador
-import com.example.time_fast.poko.Mensaje
-import com.example.time_fast.utils.Constantes
 import com.google.gson.Gson
-import com.koushikdutta.ion.Ion
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
-import java.nio.charset.Charset
 
 class ActualizarPerfilActivity : AppCompatActivity() {
     private lateinit var binding: ActivityActualizarPerfilBinding
@@ -129,7 +120,7 @@ class ActualizarPerfilActivity : AppCompatActivity() {
         binding.etApellidoMaterno.setText(colaborador.apellidoMaterno)
         binding.etCorreo.setText(colaborador.correoElectronico)
         binding.etCURP.setText(colaborador.CURP)
-
+        binding.etNumeroLicencia.setText(colaborador.numeroLicencia)
         val dao = ColaboradorDAO(this)
         dao.obtenerFoto(colaborador.idColaborador,
             { bitmap ->
@@ -146,6 +137,7 @@ class ActualizarPerfilActivity : AppCompatActivity() {
         colaborador.apellidoMaterno = binding.etApellidoMaterno.text.toString()
         colaborador.correoElectronico = binding.etCorreo.text.toString()
         colaborador.CURP = binding.etCURP.text.toString()
+        colaborador.numeroLicencia =binding.etNumeroLicencia.text.toString()
 
         val dao = ColaboradorDAO(this)
 
@@ -155,6 +147,10 @@ class ActualizarPerfilActivity : AppCompatActivity() {
                 if (fotoPerfil != null) {
                     subirFotoPerfil(colaborador.idColaborador)
                 }
+                val intent = Intent(this, VisualizarPerfilActivity::class.java)
+                intent.putExtra("colaborador", Gson().toJson(colaborador))
+                startActivityForResult(intent, RESULT_OK)
+                finish()
             },
             { error ->
                 Toast.makeText(this, error, Toast.LENGTH_LONG).show()
@@ -169,10 +165,10 @@ class ActualizarPerfilActivity : AppCompatActivity() {
         val apellidoMaterno = binding.etApellidoMaterno.text.toString()
         val correoElectronico = binding.etCorreo.text.toString()
         val CURP = binding.etCURP.text.toString()
-
+        val numeroLicencia = binding.etNumeroLicencia.text.toString()
         return nombre.isNotEmpty() && apellidoPaterno.isNotEmpty() &&
                 apellidoMaterno.isNotEmpty() && correoElectronico.isNotEmpty() &&
-                CURP.isNotEmpty()
+                CURP.isNotEmpty() && numeroLicencia.isNotEmpty()
     }
 
     private fun cancelarEdicion() {

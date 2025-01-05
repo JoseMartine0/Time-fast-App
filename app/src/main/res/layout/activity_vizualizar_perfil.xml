@@ -6,17 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:id="@+id/visualizar"
     tools:context=".VisualizarPerfilActivity">
 
+    <!-- ScrollView para hacer el contenido desplazable -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
+        <!-- Contenedor principal -->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <!-- Imagen decorativa superior -->
             <ImageView
                 android:id="@+id/ivTopDecoration"
                 android:layout_width="match_parent"
@@ -30,28 +33,19 @@
                 android:id="@+id/ivActualizarPerfil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end|top"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="105dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="-50dp"
                 android:src="@drawable/ic_edit"
                 android:background="@null"
                 android:contentDescription="Actualizar perfil" />
 
+            <!-- Contenido principal -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp">
-
-                <!-- Título -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="16dp"
-                    android:text="Detalles del Colaborador"
-                    android:textColor="@color/black"
-                    android:textSize="24sp" />
 
                 <!-- Imagen de perfil -->
                 <ImageView
@@ -65,9 +59,7 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_default_profile" />
 
-                <!-- Datos del colaborador -->
-
-                <!-- Nombre -->
+                <!-- Tarjetas de información -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -84,7 +76,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Nombre :"
+                            android:text="Nombre:"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
 
@@ -92,12 +84,11 @@
                             android:id="@+id/tvNombre"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Juan"
+                            android:text="Juan Pérez"
                             android:textColor="@color/black" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- Correo Electrónico -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -114,7 +105,35 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Correo Electrónico :"
+                            android:text="Número de Licencia:"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvNumeroLicencia"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ABC123456"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Correo Electrónico:"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
 
@@ -127,7 +146,6 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- Número Personal -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -144,7 +162,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Número Personal :"
+                            android:text="Número Personal:"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
 
@@ -157,7 +175,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- CURP -->
+                <!-- Más contenido según sea necesario -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -184,36 +202,7 @@
                             android:layout_height="wrap_content"
                             android:text="ABCD123456"
                             android:textColor="@color/black" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
 
-                <!-- Rol -->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Rol:"
-                            android:textColor="@color/black"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tvRol"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Gerente"
-                            android:textColor="@color/black" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -228,9 +217,7 @@
                     android:textStyle="bold" />
 
             </LinearLayout>
-
-        </FrameLayout>
-
+        </LinearLayout>
     </ScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
